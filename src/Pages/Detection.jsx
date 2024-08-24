@@ -53,7 +53,7 @@ export default function Articles() {
             />
             </div>
 
-          <div className="font-spacegrotesksemibold border-y-4 font-spacegrotesksemibold border-black font-medium lg:text-2xl md:text-2xl sm:text-xl text-xl w-fit lg:ml-20 ml-2 text-center mt-48">
+          <div className="font-spacegrotesksemibold border-y-4 border-black font-medium lg:text-2xl md:text-2xl sm:text-xl text-xl w-fit lg:ml-20 ml-2 text-center mt-48">
             Model and Remedies
           </div>
           <div className='md:flex  justify-between items-center m-20 md:mx-80'>
