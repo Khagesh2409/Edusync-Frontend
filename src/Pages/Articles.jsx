@@ -4,7 +4,7 @@ import Navbar from "../Components/Navbar";
 export default function Articles() {
   return (
     <div>
-        <Navbar />
+        Articles
     </div>
   )
 }
