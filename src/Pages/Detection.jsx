@@ -8,7 +8,7 @@ import videoMouth from '../assets/test.mp4'
 export default function Articles() {
   return (
     <div>
-        <Navbar />
+        {/* <Navbar /> */}
         <div>
         <div className="border-y-4 font-spacegrotesksemibold border-black font-medium lg:text-4xl md:text-3xl sm:text-2xl text-2xl w-fit lg:ml-20 ml-2 text-center">
             {`Phenome V and B`}
@@ -83,11 +83,18 @@ export default function Articles() {
             </div>
           </div>
         </div>
-        <div className='md:flex items-center gap-20 justify-center'>
-          <button className=''></button>
-          <button></button>
+        <div className='md:flex  justify-between mx-20 lg:mx-80 my-10'>
+        <button className="w-[9.5rem] h-[4rem] bg-[#0984E3] mt-10 rounded-lg text-white drop-shadow-[1px_2px_1px_rgba(0,0,0,0.7)] hover:opacity-80 flex justify-center items-center">
+          <div className="mx-1">Test Again</div>
+          {/* <img src={Sparkle} className="h-[1rem]"></img> */}
+        </button>
+        <button className="w-[9.5rem] h-[4rem] bg-[#89D85D] mt-10 rounded-lg drop-shadow-[1px_2px_1px_rgba(0,0,0,0.7)] hover:opacity-80 flex justify-center items-center">
+          <div className="mx-1 font-bold">Back To Learning</div>
+          {/* <img src={Sparkle} className="h-[1rem]"></img> */}
+        </button>
+          {/* <button></button> */}
         </div>
-        <footer className="bg-gray-200 mt-20">
+        {/* <footer className="bg-gray-200 mt-20">
         <div className="container px-4 mx-auto">
           <div className="pt-24 pb-11 mx-auto max-w-4xl lg:items-start lg:justify-start md:items-start md:justify-start flex items-center justify-center flex-col">
             <a className="block md:mx-auto mb-5 max-w-max text-center" href="#">
@@ -145,7 +152,7 @@ export default function Articles() {
             Copyright Awaaz 2024
           </p>
         </div>
-      </footer>
+      </footer> */}
     </div>
   )
 }
