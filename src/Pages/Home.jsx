@@ -10,12 +10,26 @@ import RealTIme from "../assets/RealTIme.png";
 import Dimensional from "../assets/threeDimensional.png";
 import Illustration from "../assets/Illustration.png";
 import Contact from "../assets/Contact Us.png";
-
-import { useState } from "react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { Field, Label, Switch } from "@headlessui/react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 
 export default function Home() {
+  const navigate = useNavigate();
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { loginWithRedirect } = useAuth0();
+  const getstarted = () => {
+    if (isAuthenticated) {
+      navigate("/learning");
+    } else {
+      loginWithRedirect();
+    }
+  };
+  const mySectionRef = useRef(null);
+  const scrollToSection = () => {
+    mySectionRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div>
       <Nav />
@@ -39,13 +53,13 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col lg:flex-row sm:flex-row lg:justify-start gap-8 sm:justify-center">
-            <div className="flex justify-center">
+            <div onClick={getstarted} className="flex justify-center">
               <button className="border rounded-md font-spacegroteskmedium flex items-center justify-center px-12 py-4 bg-[#89D85D] text-black hover:bg-opacity-70 border-black">
                 <p>Get Started</p>
               </button>
             </div>
             <div className="flex justify-center">
-              <button className="border flex font-spacegroteskmedium items-center justify-center rounded-md px-7 py-4 border-black hover:bg-black hover:text-white">
+              <button onClick={scrollToSection} className="border flex font-spacegroteskmedium items-center justify-center rounded-md px-7 py-4 border-black hover:bg-black hover:text-white">
                 <p>Browse Features</p>
               </button>
             </div>
@@ -57,14 +71,13 @@ export default function Home() {
         </div>
       </div>
 
-      <div>
+      <div ref={mySectionRef}>
         <div className="flex items-center justify-center lg:block">
           <div className="border-y-4 lg:mt-36 md:mt-32 sm:mt-14 mt-16 font-spacegrotesksemibold border-black font-medium lg:text-4xl md:text-3xl sm:text-2xl text-2xl w-fit lg:ml-20 text-center">
             Features
           </div>
         </div>
-
-        <div className="">
+        <div>
           <div className="flex flex-wrap items-center justify-center gap-8 p-10">
             <div className="bg-[#2D8CFF] rounded-3xl p-6 shadow-2xl lg:h-64 lg:w-96 md:h-64 md:w-96 sm:w-96 max-w-96">
               <div className="flex items-center justify-center lg:items-start lg:justify-start md:items-start md:justify-start">
