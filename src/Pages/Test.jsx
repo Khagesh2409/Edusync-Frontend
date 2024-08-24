@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RecordButton from "../Components/RecordButton";
 import Mic from "../Components/Mic";
 import NavButton from "../Components/NavButton";
@@ -6,19 +6,24 @@ import NavButton from "../Components/NavButton";
 const Test = () => {
   let [letter, setLetter] = useState("A");
   let [attempts, setAttempts] = useState([]);
-  let word = "vote";
-  let pronounciation = "/vout/";
+  let word = "apple";
+  let pronounciation = "/appel/";
   let averageAccuracy = 0;
-  let [image, setImage] = useState(
-    "https://cdn.britannica.com/22/187222-050-07B17FB6/apples-on-a-tree-branch.jpg"
-  );
+  let [image, setImage] = useState("");
+
+  useEffect(function sampleRun() {
+    setImage(
+      "https://cdn.britannica.com/22/187222-050-07B17FB6/apples-on-a-tree-branch.jpg"
+    );
+    setAttempts([64, 74]);
+  }, []);
 
   for (let i = 0; i < attempts.length; i++) {
     averageAccuracy += attempts[i];
   }
 
   return (
-    <div className="md:px-[9rem] pb-[4rem]">
+    <div className="md:px-[9rem] pb-[4rem] font-spacegroteskmedium">
       <div className="text-md font-semibold mb-6">Letter : {letter}</div>
 
       <div className="flex justify-between text-md font-semibold mb-5">
@@ -26,7 +31,11 @@ const Test = () => {
           Word to be spelled : {word.charAt(0).toUpperCase() + word.slice(1)}
         </span>
         <span className="me-[4rem]">
-          Average Correct Percentage - {averageAccuracy} %
+          Average Correct Percentage -{" "}
+          {attempts.length != 0
+            ? averageAccuracy / attempts.length
+            : averageAccuracy}{" "}
+          %
         </span>
       </div>
 
