@@ -10,22 +10,22 @@ export default function Articles() {
     <div>
         {/* <Navbar /> */}
         <div>
-        <div className="border-y-4 font-spacegrotesksemibold border-black font-medium lg:text-4xl md:text-3xl sm:text-2xl text-2xl w-fit lg:ml-20 ml-2 text-center">
+        <div className="border-y-4 font-spacegrotesksemibold border-black font-medium lg:text-2xl md:text-2xl sm:text-xl text-xl w-fit lg:ml-20 ml-2 text-center">
             {`Phenome V and B`}
           </div>
-          <div className=" font-spacegrotesksemibold border-black font-medium lg:text-2xl md:text-xl sm:text-xl text-xl w-fit lg:ml-20 ml-2 text-center mt-10">
+          <div className=" font-spacegrotesksemibold border-black font-medium lg:text-2xl md:text-xl sm:text-xl text-xl w-fit lg:ml-20 ml-2 text-center mt-28">
             Test Number : {`2`}
             </div>
           <div className=" font-spacegrotesksemibold border-black text-sky-400 font-medium lg:text-2xl md:text-xl sm:text-xl text-xl w-fit lg:ml-20 ml-2 text-center mt-10">
             Details about the test  :
           </div>
-          < div className='md:flex  justify-between items-center font-medium lg:text-2xl md:text-xl sm:text-xl text-xl  lg:ml-20 ml-2 lg:mr-20 mr-2  text-center mt-3'>
+          < div className='md:flex font-spacegrotesksemibold justify-between items-center font-medium lg:text-2xl md:text-xl sm:text-xl text-xl  lg:ml-20 ml-2 lg:mr-20 mr-2  text-center mt-10'>
                 <div>Words to be spelled :{`Boat` }</div>
                 <div>Phenome word: {`Voat`}</div>
                 <div>Average correct percentage : {`30`}%</div>
           
           </div>
-          <div className="border-y-4 font-spacegrotesksemibold border-black font-medium lg:text-4xl md:text-3xl sm:text-2xl text-2xl w-fit lg:ml-20 ml-2 text-center mt-14">
+          <div className="border-y-4 font-spacegrotesksemibold border-black font-medium lg:text-2xl md:text-2xl sm:text-xl text-xl w-fit lg:ml-20 ml-2 text-center mt-40 mb-14">
             Analysis Result
           </div>
           <div className="relative w-full mx-auto mt-4">
@@ -34,7 +34,7 @@ export default function Articles() {
             {/* <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('../assets/Component 35.png')" }}></div> */}
 
             {/* Progress Bar */}
-            <div className="relative z-10 w-9/12 mx-2 md:mx-20 h-12 bg-[#E5D1FF]">
+            <div className="font-spacegrotesksemibold relative z-10 w-9/12 mx-2 md:mx-20 h-12 bg-[#E5D1FF]">
                 {/* Progress Indicator */}
                 <div
                 className="flex items-center  justify-center bg-purple-600 text-white font-bold h-full "
@@ -53,17 +53,17 @@ export default function Articles() {
             />
             </div>
 
-          <div className="border-y-4 font-spacegrotesksemibold border-black font-medium lg:text-4xl md:text-3xl sm:text-2xl text-2xl w-fit lg:ml-20 ml-2 text-center mt-14">
+          <div className="font-spacegrotesksemibold border-y-4 font-spacegrotesksemibold border-black font-medium lg:text-2xl md:text-2xl sm:text-xl text-xl w-fit lg:ml-20 ml-2 text-center mt-48">
             Model and Remedies
           </div>
-          <div className='md:flex  justify-between items-center m-20'>
+          <div className='md:flex  justify-between items-center m-20 md:mx-80'>
             <div className='rounded '>
-            <video width="320" height='90%' autoplay controls className='rounded-xl'>
+            <video width="320" height="320" autoplay controls className='rounded-xl'>
                                         <source src={videoMouth} type='video/mp4' />
             </video>
             </div>
             <div>
-            <div className="bg-white rounded-3xl p-6 shadow-2xl lg:h-64 lg:w-96 md:h-64 md:w-96 max-w-96 mt-10">
+            <div className="font-spacegrotesksemibold bg-white rounded-3xl p-10 shadow-2xl lg:h-80 lg:w-96 md:h-80 md:w-96 max-w-96 mt-10 ">
               <div className="md:flex items-center gap-20 justify-center lg:items-start lg:justify-start md:items-start md:justify-start">
                 {/* <img
                   src={Progress}
@@ -72,24 +72,24 @@ export default function Articles() {
                 {/* /> */}
               </div>
               <div className=''>
-              <div className="font-spacegrotesksemibold mb-2 lg:text-2xl md:text-2xl text-lg text-center lg:text-start md:text-start bg-[#89D85D] rounded-xl p-2 textcenter">
-                Progress Tracking
+              <div className="font-spacegrotesksemibold mb-2 lg:text-xl md:text-xl text-lg text-center bg-[#89D85D] rounded-2xl w-max p-2 mt-2 drop-shadow-[2px_3px_2px_rgba(0,0,0,0.7)]">
+                Instructions
               </div>
-              <div className="font-spacegrotesklight text-center lg:text-start md:text-start font-semibold">
-                {`Track success, analyze and celebrate milestone.`}
+              <div className="font-spacegrotesklight text-center md:text-xl text-lg lg:text-start md:text-start font-semibold mt-5">
+                {`Here, the instructions and remedies would appear.this model will not appear if score is good instead party poppers will appear of nowhere stating you have passed the test.`}
               </div>
               </div>
             </div>
             </div>
           </div>
         </div>
-        <div className='md:flex  justify-between mx-20 lg:mx-80 my-10'>
-        <button className="w-[9.5rem] h-[4rem] bg-[#0984E3] mt-10 rounded-lg text-white drop-shadow-[1px_2px_1px_rgba(0,0,0,0.7)] hover:opacity-80 flex justify-center items-center">
-          <div className="mx-1">Test Again</div>
+        <div className='font-spacegrotesksemibold md:flex gap-20 ml-40 mx-20 lg:mx-80 my-10 mb-20'>
+        <button className="w-[20rem] h-[4rem] bg-[#0984E3] mt-10 rounded-lg text-white drop-shadow-[1px_2px_1px_rgba(0,0,0,0.7)] hover:opacity-80 flex justify-center ml-20 items-center">
+          <div className="mx-1  text-xl">Test Again</div>
           {/* <img src={Sparkle} className="h-[1rem]"></img> */}
         </button>
-        <button className="w-[9.5rem] h-[4rem] bg-[#89D85D] mt-10 rounded-lg drop-shadow-[1px_2px_1px_rgba(0,0,0,0.7)] hover:opacity-80 flex justify-center items-center">
-          <div className="mx-1 font-bold">Back To Learning</div>
+        <button className="font-spacegrotesksemibold w-[20rem] h-[4rem] bg-[#89D85D] mt-10 rounded-lg drop-shadow-[1px_2px_1px_rgba(0,0,0,0.7)] hover:opacity-80 flex justify-center items-center">
+          <div className="mx-1 text-xl">Back To Learning</div>
           {/* <img src={Sparkle} className="h-[1rem]"></img> */}
         </button>
           {/* <button></button> */}
