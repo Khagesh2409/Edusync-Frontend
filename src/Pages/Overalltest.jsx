@@ -187,7 +187,7 @@ const Overalltest = () => {
             onClickHandler={previousLetter}
           />
         )}
-        {letter != "Z" && (
+        {attempts.length == 3 && letter != "Z" && (
           <NavButton
             text="Next"
             currLetter={letter}
