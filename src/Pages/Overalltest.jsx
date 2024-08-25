@@ -147,8 +147,8 @@ const Overalltest = () => {
                 : { backgroundColor: "#E3E2E7", color: "black" }
             }
           >
-            <div>Attemp 1</div>
-            {attempts[0] && <div>Accuracy {attempts[0]}</div>}
+            <div>Attempt 1</div>
+            {attempts[0] != 0 && <div>Accuracy {attempts[0]}</div>}
           </div>
 
           <div
@@ -161,8 +161,8 @@ const Overalltest = () => {
                 : { backgroundColor: "#E3E2E7", color: "black" }
             }
           >
-            <div>Attemp 2</div>
-            {attempts[1] && <div>Accuracy {attempts[1]}</div>}
+            <div>Attempt 2</div>
+            {attempts[1] != 0 && <div>Accuracy {attempts[1]}</div>}
           </div>
 
           <div
@@ -175,8 +175,8 @@ const Overalltest = () => {
                 : { backgroundColor: "#E3E2E7", color: "black" }
             }
           >
-            <div>Attemp 3</div>
-            {attempts[2] && <div>Accuracy {attempts[2]}</div>}
+            <div>Attempt 3</div>
+            {attempts[2] != 0 && <div>Accuracy {attempts[2]}</div>}
           </div>
         </div>
       </div>
