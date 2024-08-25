@@ -39,7 +39,7 @@ const Overalltest = () => {
     if (average == 0) {
       setAverageAccuracy(0);
     } else {
-      setAverageAccuracy(average / attempts.length);
+      setAverageAccuracy((average / attempts.length).toFixed(2));
     }
   }, [attempts]);
 
