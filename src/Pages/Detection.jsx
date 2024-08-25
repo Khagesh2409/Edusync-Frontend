@@ -5,7 +5,7 @@ import Trophy from '../assets/Trophy.png'
 import char from '../assets/character_de1111a819 1.png'
 // import videoMouth from '../assets/test.mp4'
 
-export default function Articles() {
+export default function Detection() {
   return (
     <div>
         {/* <Navbar /> */}
@@ -58,9 +58,9 @@ export default function Articles() {
           </div>
           <div className='md:flex  justify-between items-center m-20 md:mx-80'>
             <div className='rounded '>
-            <video width="320" height="320" autoplay controls className='rounded-xl'>
+            {/* <video width="320" height="320" autoplay controls className='rounded-xl'>
                                         <source src={videoMouth} type='video/mp4' />
-            </video>
+            </video> */}
             </div>
             <div>
             <div className="font-spacegrotesksemibold bg-white rounded-3xl p-10 shadow-2xl lg:h-80 lg:w-96 md:h-80 md:w-96 max-w-96 mt-10 ">

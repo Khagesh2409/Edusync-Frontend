@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useAuth0 } from "@auth0/auth0-react";
 import Modal from "./LogoutModal";
@@ -55,12 +54,20 @@ function Example() {
             </Link>
           ))}
           {isAuthenticated ? (
-            <Link
-              to="/learning"
-              className="mt-2 font-spacegroteskregular cursor-pointer"
-            >
-              Learning
-            </Link>
+            <div className="flex items-center justify-center gap-8">
+              <Link
+                to="/learning"
+                className="mt-2 font-spacegroteskregular cursor-pointer"
+              >
+                Learning
+              </Link>
+              <Link
+                to="http://localhost:8501"
+                className="mt-2 font-spacegroteskregular cursor-pointer"
+              >
+                Conversation
+              </Link>
+            </div>
           ) : (
             <></>
           )}
