@@ -60,7 +60,8 @@ const Overalltest = () => {
   const recordButtonHandler = async () => {
     setRecording(true);
     const url = baseUrl + "/record";
-    const data = await fetch(url);
+    const res = await fetch(url);
+    const data = await res.json();
     setAttempts((prev) => {
       let newAttempts = [...prev, data.percentage];
       return newAttempts;
