@@ -1,4 +1,5 @@
 # EduSync - PPT - https://edusync-empowering-neuro-wotiegg.gamma.site/
+# Click Below to watch project description video on Youtube
 [![Watch EduSync Project Description](https://img.youtube.com/vi/72UDGyiy9Kg/0.jpg)](https://www.youtube.com/watch?v=72UDGyiy9Kg)
 
 
