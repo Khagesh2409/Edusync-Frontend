@@ -11,9 +11,14 @@ import school from "../assets/school.png";
 import CourseModal from "../Components/CourseModal";
 import Articlescomponent from "../Components/Articlescomponent";
 import "../App.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Learning() {
   // const [value, setValue] = React.useState(dayjs("2024-08-25"));
+  const navigate = useNavigate();
+  const overalltest = () => {
+    navigate("/overall");
+  }
   return (
     <div>
       <div className="flex justify-center gap-[10%] items-center">
@@ -26,7 +31,7 @@ export default function Learning() {
               <p className="text-xl mb-6 font-spacegrotesksemibold">
                 Don't worry take our detection of phoneme error test
               </p>
-              <button className="bg-[#89D85D] shadow-lg text-lg hover:bg-opacity-80 font-spacegrotesksemibold py-4 px-4 rounded-lg">
+              <button onClick={overalltest} className="bg-[#89D85D] shadow-lg text-lg hover:bg-opacity-80 font-spacegrotesksemibold py-4 px-4 rounded-lg">
                 Start Test <span className="ml-2">→</span>
               </button>
             </div>

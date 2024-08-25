@@ -3,7 +3,7 @@ import Navbar from "../Components/Navbar";
 import Component from '../assets/Component 35.png'
 import Trophy from '../assets/Trophy.png'
 import char from '../assets/character_de1111a819 1.png'
-import videoMouth from '../assets/test.mp4'
+// import videoMouth from '../assets/test.mp4'
 
 export default function Articles() {
   return (

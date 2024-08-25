@@ -3,7 +3,7 @@ import RecordButton from "../Components/RecordButton";
 import Mic from "../Components/Mic";
 import NavButton from "../Components/NavButton";
 
-const Test = () => {
+const Overalltest = () => {
   let [letter, setLetter] = useState("A");
   let [attempts, setAttempts] = useState([]);
   let word = "apple";
@@ -108,4 +108,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default Overalltest;

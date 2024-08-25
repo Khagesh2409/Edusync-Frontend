@@ -1,7 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import learningphonemechar from "../assets/learningphonemechar.png";
 
-export default function CourseModal({Phoneme1, Phoneme2, Status, Color, Progress}) {
+export default function CourseModal({
+  Phoneme1,
+  Phoneme2,
+  Status,
+  Color,
+  Progress,
+}) {
+  const navigate = useNavigate();
+  const coursetest = () => {
+    navigate("/course");
+  };
   return (
     <div>
       <div className="bg-[#F5F0F0] w-[800px] gap-8 flex items-center justify-center p-8 rounded-xl shadow-xl">
@@ -20,10 +31,16 @@ export default function CourseModal({Phoneme1, Phoneme2, Status, Color, Progress
             </div>
           </div>
           <div>
-            <p className="font-spacegrotesksemibold text-xl">Tests: {Progress} / 4</p>
+            <p className="font-spacegrotesksemibold text-xl">
+              Tests: {Progress} / 4
+            </p>
           </div>
           <div>
-            <div style={{ backgroundColor: Color }} className="p-2 rounded-lg">
+            <div
+              onClick={coursetest}
+              style={{ backgroundColor: Color }}
+              className="p-2 rounded-lg"
+            >
               <button className="font-spacegrotesksemibold text-white text-md">
                 {Status} <span>→</span>
               </button>
