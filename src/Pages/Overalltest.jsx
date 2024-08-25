@@ -87,10 +87,7 @@ const Overalltest = () => {
         </span>
         <span className="me-[4rem]">
           Average Correct Percentage -{" "}
-          {attempts.length != 0
-            ? averageAccuracy / attempts.length
-            : averageAccuracy}{" "}
-          %
+          {attempts.length != 0 ? averageAccuracy : averageAccuracy} %
         </span>
       </div>
 

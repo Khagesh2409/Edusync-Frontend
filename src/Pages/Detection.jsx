@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
-import Component from '../assets/Component 35.png';
-import Trophy from '../assets/Trophy.png';
-import char from '../assets/character_de1111a819 1.png';
-import videoMouth from '../assets/test.mp4';
+import Component from "../assets/Component 35.png";
+import Trophy from "../assets/Trophy.png";
+import char from "../assets/character_de1111a819 1.png";
+import videoMouth from "../assets/test.mp4";
 
 export default function Articles() {
   const [percentage, setPercentage] = useState(null);
@@ -22,13 +22,13 @@ export default function Articles() {
   useEffect(() => {
     if (percentage !== null) {
       fetch(`http://localhost:5000/remedy/${percentage}`)
-        .then(response => response.json())
-        .then(data => {
+        .then((response) => response.json())
+        .then((data) => {
           if (data && data.remedy) {
             setRemedy(data.remedy);
           }
         })
-        .catch(error => console.error('Error fetching remedy:', error));
+        .catch((error) => console.error("Error fetching remedy:", error));
     }
   }, [percentage]);
 
@@ -45,7 +45,7 @@ export default function Articles() {
         <div className="font-spacegrotesksemibold border-black text-sky-400 font-medium lg:text-2xl md:text-xl sm:text-xl text-xl w-fit lg:ml-20 ml-2 text-center mt-10">
           Details about the test:
         </div>
-        <div className='md:flex font-spacegrotesksemibold justify-between items-center font-medium lg:text-2xl md:text-xl sm:text-xl text-xl lg:ml-20 ml-2 lg:mr-20 mr-2 text-center mt-10'>
+        <div className="md:flex font-spacegrotesksemibold justify-between items-center font-medium lg:text-2xl md:text-xl sm:text-xl text-xl lg:ml-20 ml-2 lg:mr-20 mr-2 text-center mt-10">
           <div>Words to be spelled: {`Boat`}</div>
           <div>Phenome word: {`Voat`}</div>
           <div>Average correct percentage: {`${percentage}`}%</div>
@@ -63,7 +63,12 @@ export default function Articles() {
               className="flex items-center justify-center bg-purple-600 text-white font-bold h-full"
               style={{ width: `${percentage}%` }}
             >
-              <img src={char} alt="Cat" className="absolute h-40 w-50" style={{ left: `${percentage - 5}%` }} />
+              <img
+                src={char}
+                alt="Cat"
+                className="absolute h-40 w-50"
+                style={{ left: `${percentage - 5}%` }}
+              />
               <span>{percentage}%</span>
             </div>
           </div>
@@ -74,17 +79,23 @@ export default function Articles() {
             className="absolute z-20 right-[440px] bottom-0 transform translate-x-1/2"
           />
         </div>
-        
+
         {/* Conditionally render Model and Remedies */}
         {percentage <= 50 && (
           <>
             <div className="font-spacegrotesksemibold border-y-4 border-black font-medium lg:text-2xl md:text-2xl sm:text-xl text-xl w-fit lg:ml-20 ml-2 text-center mt-48">
               Model and Remedies
             </div>
-            <div className='md:flex justify-between items-center m-20 md:mx-80'>
-              <div className='rounded'>
-                <video width="320" height="320" autoPlay controls className='rounded-xl'>
-                  <source src={videoMouth} type='video/mp4' />
+            <div className="md:flex justify-between items-center m-20 md:mx-80">
+              <div className="rounded">
+                <video
+                  width="320"
+                  height="320"
+                  autoPlay
+                  controls
+                  className="rounded-xl"
+                >
+                  <source src={videoMouth} type="video/mp4" />
                 </video>
               </div>
               <div>
@@ -106,7 +117,7 @@ export default function Articles() {
           </>
         )}
       </div>
-      <div className='font-spacegrotesksemibold md:flex gap-20 ml-40 mx-20 lg:mx-80 my-10 mb-20'>
+      <div className="font-spacegrotesksemibold md:flex gap-20 ml-40 mx-20 lg:mx-80 my-10 mb-20">
         <button className="w-[20rem] h-[4rem] bg-[#0984E3] mt-10 rounded-lg text-white drop-shadow-[1px_2px_1px_rgba(0,0,0,0.7)] hover:opacity-80 flex justify-center ml-20 items-center">
           <div className="mx-1 text-xl">Test Again</div>
           {/* <img src={Sparkle} className="h-[1rem]"></img> */}
@@ -118,5 +129,5 @@ export default function Articles() {
         {/* <button></button> */}
       </div>
     </div>
-  )
+  );
 }
