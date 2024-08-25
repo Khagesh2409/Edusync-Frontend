@@ -3,26 +3,62 @@ import RecordButton from "../Components/RecordButton";
 import Mic from "../Components/Mic";
 import NavButton from "../Components/NavButton";
 import RecordingLoader from "../Components/RecordingLoader";
+import { useNavigate } from "react-router-dom";
 
-const Coursetest = () => {
-  let [letter, setLetter] = useState("A");
+const baseUrl = "http://localhost:5000";
+
+const Overalltest = () => {
+  const navigate = useNavigate();
+  let [letter, setLetter] = useState("B");
   let [attempts, setAttempts] = useState([]);
-  let word = "apple";
-  let pronounciation = "/appel/";
+  let [word, setWord] = useState("");
+  let [pronounciation, setPronounciation] = useState("");
   let averageAccuracy = 0;
   let [image, setImage] = useState("");
   let [recording, setRecording] = useState(false);
 
-  useEffect(function sampleRun() {
-    setImage(
-      "https://cdn.britannica.com/22/187222-050-07B17FB6/apples-on-a-tree-branch.jpg"
-    );
-    setAttempts([43, 67]);
-  }, []);
+  const improvisationNeeded = () => {
+    navigate("/detect/" + (averageAccuracy / attempts.length));
+  }
 
-  const recordButtonHandler = () => {
+  useEffect(() => {
+    async function letterCall() {
+      let url = baseUrl + "/generate_word/" + "B";
+      const res = await fetch(url);
+      const data = await res.json();
+      setImage(data.image_link);
+      setWord(data.word1);
+      setPronounciation(data.pronunciation);
+    }
+
+    letterCall();
+  }, [letter]);
+
+  const nextLetter = () => {
+    setLetter((prevLetter) => {
+      if (prevLetter === "A") return "B";
+      if (prevLetter === "B") return "Z";
+      return "A"; // If the letter is 'Z', wrap around to 'A'
+    });
+  };
+
+  const previousLetter = () => {
+    setLetter((prevLetter) => {
+      if (prevLetter === "A") return "Z";
+      if (prevLetter === "Z") return "B";
+      return "A"; // If the letter is 'B', wrap around to 'A'
+    });
+  };
+
+  const recordButtonHandler = async () => {
     setRecording(true);
-    //api call
+    const url = baseUrl + "/record";
+    const res = await fetch(url);
+    const data = await res.json();
+    setAttempts((prev) => {
+      let newAttempts = [...prev, data.percentage];
+      return newAttempts;
+    });
     setTimeout(() => {
       setRecording(false);
     }, 5000);
@@ -56,9 +92,9 @@ const Coursetest = () => {
       <center className="text-2xl">
         <div className="mb-1">{word}</div>
         <div className="mb-8">{pronounciation}</div>
-        {image.length != 0 ? (
+        {/* {image.length != 0 ? (
           <img src={image} className="h-[12rem] my-8 rounded-xl" />
-        ) : null}
+        ) : null} */}
         {!recording ? <Mic /> : <RecordingLoader />}
       </center>
 
@@ -81,7 +117,13 @@ const Coursetest = () => {
           text="Stop Recording"
           onClickHandler={stopRecordHandler}
         />
-        <RecordButton bgColor="#0984E3" text="Reset all tries" />
+        <RecordButton
+          bgColor="#0984E3"
+          text="Reset all tries"
+          onClickHandler={() => {
+            setAttempts([]);
+          }}
+        />
       </div>
 
       <div className="my-[5rem]">
@@ -98,7 +140,7 @@ const Coursetest = () => {
                 : { backgroundColor: "#E3E2E7", color: "black" }
             }
           >
-            <div>Attemp 1</div>
+            <div>Attempt 1</div>
             {attempts[0] && <div>Accuracy {attempts[0]}</div>}
           </div>
 
@@ -112,7 +154,7 @@ const Coursetest = () => {
                 : { backgroundColor: "#E3E2E7", color: "black" }
             }
           >
-            <div>Attemp 2</div>
+            <div>Attempt 2</div>
             {attempts[1] && <div>Accuracy {attempts[1]}</div>}
           </div>
 
@@ -126,22 +168,48 @@ const Coursetest = () => {
                 : { backgroundColor: "#E3E2E7", color: "black" }
             }
           >
-            <div>Attemp 3</div>
+            <div>Attempt 3</div>
             {attempts[2] && <div>Accuracy {attempts[2]}</div>}
           </div>
         </div>
       </div>
 
-      <div className="flex justify-center gap-x-[4rem] mt-[7rem]">
-        <NavButton
-          text="Previous"
-          currLetter={letter}
-          onClickHandler={() => {}}
-        />
-        <NavButton text="Next" currLetter={letter} onClickHandler={() => {}} />
-      </div>
+      {/* <div className="flex justify-center gap-x-[4rem] mt-[7rem]">
+        {letter != "A" && (
+          <NavButton
+            text="Previous"
+            currLetter={letter}
+            onClickHandler={previousLetter}
+          />
+        )}
+        {letter != "Z" && (
+          <NavButton
+            text="Next"
+            currLetter={letter}
+            onClickHandler={nextLetter}
+          />
+        )}
+      </div> */}
+      {
+        (averageAccuracy / attempts.length >= 50 && attempts.length == 3) ? (
+          <div className="flex items-center justify-center">
+            <button className="bg-lime-600 p-4 rounded-lg text-white shadow-md">Great going!</button>
+          </div>
+        ) : (
+          <></>
+        )
+      }
+      {
+        (averageAccuracy / attempts.length < 50 && attempts.length == 3) ? (
+          <div className="flex items-center justify-center">
+            <button onClick={improvisationNeeded} className="bg-blue-600 p-4 rounded-lg text-white shadow-md">You need to practice more!</button>
+          </div>
+        ) : (
+          <></>
+        )
+      }
     </div>
   );
 };
 
-export default Coursetest;
+export default Overalltest;

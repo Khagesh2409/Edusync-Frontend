@@ -3,12 +3,13 @@ import Navbar from "../Components/Navbar";
 import Component from '../assets/Component 35.png';
 import Trophy from '../assets/Trophy.png';
 import char from '../assets/character_de1111a819 1.png';
-import videoMouth from '../assets/test.mp4';
+import {useNavigate} from 'react-router-dom';
+// import videoMouth from '../assets/test.mp4';
 
 export default function Articles() {
   const [percentage, setPercentage] = useState(null);
   const [remedy, setRemedy] = useState(null);
-
+  const navigate = useNavigate();
   // Extract percentage from URL
   useEffect(() => {
     const url = window.location.href;
@@ -31,6 +32,14 @@ export default function Articles() {
         .catch(error => console.error('Error fetching remedy:', error));
     }
   }, [percentage]);
+
+  const backtolearning = () => {
+    navigate('/learning');
+  }
+
+  const backtotryagain = () => {
+    navigate('/course');
+  }
 
   return (
     <div>
@@ -83,9 +92,9 @@ export default function Articles() {
             </div>
             <div className='md:flex justify-between items-center m-20 md:mx-80'>
               <div className='rounded'>
-                <video width="320" height="320" autoPlay controls className='rounded-xl'>
+                {/* <video width="320" height="320" autoPlay controls className='rounded-xl'>
                   <source src={videoMouth} type='video/mp4' />
-                </video>
+                </video> */}
               </div>
               <div>
                 <div className="font-spacegrotesksemibold bg-white rounded-3xl p-10 shadow-2xl lg:h-80 lg:w-96 md:h-80 md:w-96 max-w-96 mt-10">
@@ -108,11 +117,11 @@ export default function Articles() {
       </div>
       <div className='font-spacegrotesksemibold md:flex gap-20 ml-40 mx-20 lg:mx-80 my-10 mb-20'>
         <button className="w-[20rem] h-[4rem] bg-[#0984E3] mt-10 rounded-lg text-white drop-shadow-[1px_2px_1px_rgba(0,0,0,0.7)] hover:opacity-80 flex justify-center ml-20 items-center">
-          <div className="mx-1 text-xl">Test Again</div>
+          <div onClick={backtotryagain} className="mx-1 text-xl">Test Again</div>
           {/* <img src={Sparkle} className="h-[1rem]"></img> */}
         </button>
         <button className="font-spacegrotesksemibold w-[20rem] h-[4rem] bg-[#89D85D] mt-10 rounded-lg drop-shadow-[1px_2px_1px_rgba(0,0,0,0.7)] hover:opacity-80 flex justify-center items-center">
-          <div className="mx-1 text-xl">Back To Learning</div>
+          <div onClick={backtolearning} className="mx-1 text-xl">Back To Learning</div>
           {/* <img src={Sparkle} className="h-[1rem]"></img> */}
         </button>
         {/* <button></button> */}
