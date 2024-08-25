@@ -39,7 +39,7 @@ const Overalltest = () => {
     if (average == 0) {
       setAverageAccuracy(0);
     } else {
-      setAverageAccuracy(average / attempts.length);
+      setAverageAccuracy((average / attempts.length).toFixed(2));
     }
   }, [attempts]);
 
@@ -87,10 +87,7 @@ const Overalltest = () => {
         </span>
         <span className="me-[4rem]">
           Average Correct Percentage -{" "}
-          {attempts.length != 0
-            ? averageAccuracy / attempts.length
-            : averageAccuracy}{" "}
-          %
+          {attempts.length != 0 ? averageAccuracy : averageAccuracy} %
         </span>
       </div>
 
