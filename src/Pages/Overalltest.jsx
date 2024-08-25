@@ -11,12 +11,14 @@ const Overalltest = () => {
   let [attempts, setAttempts] = useState([]);
   let [word, setWord] = useState("Apple");
   let [pronounciation, setPronounciation] = useState("/appel/");
-  let averageAccuracy = 0;
+  let [averageAccuracy, setAverageAccuracy] = useState(0);
   let [image, setImage] = useState("");
   let [recording, setRecording] = useState(false);
 
   useEffect(() => {
     async function letterCall() {
+      setAttempts([]);
+      setAverageAccuracy(0);
       let url = baseUrl + "/test/" + letter;
       const res = await fetch(url);
       const data = await res.json();
@@ -27,6 +29,19 @@ const Overalltest = () => {
 
     letterCall();
   }, [letter]);
+
+  useEffect(() => {
+    let average;
+    for (let i = 0; i < attempts.length; i++) {
+      average += attempts[i];
+    }
+
+    if (average == 0) {
+      setAverageAccuracy(0);
+    } else {
+      setAverageAccuracy(average / attempts.length);
+    }
+  }, [attempts]);
 
   const nextLetter = () => {
     setLetter((prevLetter) => {
@@ -61,10 +76,6 @@ const Overalltest = () => {
   const stopRecordHandler = () => {
     setRecording(false);
   };
-
-  for (let i = 0; i < attempts.length; i++) {
-    averageAccuracy += attempts[i];
-  }
 
   return (
     <div className="md:px-[9rem] pb-[4rem] font-spacegroteskmedium">
