@@ -31,7 +31,7 @@ const Overalltest = () => {
   }, [letter]);
 
   useEffect(() => {
-    let average;
+    let average = 0;
     for (let i = 0; i < attempts.length; i++) {
       average += attempts[i];
     }
@@ -187,7 +187,7 @@ const Overalltest = () => {
             onClickHandler={previousLetter}
           />
         )}
-        {letter != "Z" && (
+        {attempts.length == 3 && letter != "Z" && (
           <NavButton
             text="Next"
             currLetter={letter}
