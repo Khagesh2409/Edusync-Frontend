@@ -18,7 +18,7 @@ export default function App() {
         <Route path="/learning" element={<Learning />} />
         <Route path="/about" element={<About />} />
         <Route path="/articles" element={<Articles />} />
-        <Route path="/detect" element={<Detection />} />
+        <Route path="/detect/:number" element={<Detection />} />
         <Route path="/overall" element={<Overalltest />} />
         <Route path="/course" element={<Coursetest />} />
       </Routes>

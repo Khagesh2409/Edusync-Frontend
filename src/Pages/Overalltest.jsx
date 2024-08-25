@@ -2,21 +2,65 @@ import { useEffect, useState } from "react";
 import RecordButton from "../Components/RecordButton";
 import Mic from "../Components/Mic";
 import NavButton from "../Components/NavButton";
+import RecordingLoader from "../Components/RecordingLoader";
+
+const baseUrl = "http://localhost:5000";
 
 const Overalltest = () => {
   let [letter, setLetter] = useState("A");
   let [attempts, setAttempts] = useState([]);
-  let word = "apple";
-  let pronounciation = "/appel/";
+  let [word, setWord] = useState("Apple");
+  let [pronounciation, setPronounciation] = useState("/appel/");
   let averageAccuracy = 0;
   let [image, setImage] = useState("");
+  let [recording, setRecording] = useState(false);
 
-  useEffect(function sampleRun() {
-    setImage(
-      "https://cdn.britannica.com/22/187222-050-07B17FB6/apples-on-a-tree-branch.jpg"
-    );
-    setAttempts([64, 74]);
-  }, []);
+  useEffect(() => {
+    async function letterCall() {
+      let url = baseUrl + "/test/" + letter;
+      const res = await fetch(url);
+      const data = await res.json();
+      setImage(data.image_link);
+      setWord(data.word1);
+      setPronounciation(data.pronunciation);
+    }
+
+    letterCall();
+  }, [letter]);
+
+  const nextLetter = () => {
+    setLetter((prevLetter) => {
+      if (prevLetter === "A") return "B";
+      if (prevLetter === "B") return "Z";
+      return "A"; // If the letter is 'Z', wrap around to 'A'
+    });
+  };
+
+  const previousLetter = () => {
+    setLetter((prevLetter) => {
+      if (prevLetter === "A") return "Z";
+      if (prevLetter === "Z") return "B";
+      return "A"; // If the letter is 'B', wrap around to 'A'
+    });
+  };
+
+  const recordButtonHandler = async () => {
+    setRecording(true);
+    const url = baseUrl + "/record";
+    const res = await fetch(url);
+    const data = await res.json();
+    setAttempts((prev) => {
+      let newAttempts = [...prev, data.percentage];
+      return newAttempts;
+    });
+    setTimeout(() => {
+      setRecording(false);
+    }, 5000);
+  };
+
+  const stopRecordHandler = () => {
+    setRecording(false);
+  };
 
   for (let i = 0; i < attempts.length; i++) {
     averageAccuracy += attempts[i];
@@ -45,13 +89,35 @@ const Overalltest = () => {
         {image.length != 0 ? (
           <img src={image} className="h-[12rem] my-8 rounded-xl" />
         ) : null}
-        <Mic />
+        {!recording ? <Mic /> : <RecordingLoader />}
       </center>
 
       <div className="flex w-[75%] mx-auto justify-center mt-5">
-        <RecordButton bgColor="#89D85D" text="Start Recording" />
-        <RecordButton bgColor="#D86C5D" text="Stop Recording" />
-        <RecordButton bgColor="#0984E3" text="Reset all tries" />
+        {!recording ? (
+          <RecordButton
+            bgColor="#89D85D"
+            text="Start Recording"
+            onClickHandler={recordButtonHandler}
+          />
+        ) : (
+          <RecordButton
+            bgColor="#E3E2E7"
+            textColor="black"
+            text="Recording..."
+          />
+        )}
+        <RecordButton
+          bgColor="#D86C5D"
+          text="Stop Recording"
+          onClickHandler={stopRecordHandler}
+        />
+        <RecordButton
+          bgColor="#0984E3"
+          text="Reset all tries"
+          onClickHandler={() => {
+            setAttempts([]);
+          }}
+        />
       </div>
 
       <div className="my-[5rem]">
@@ -62,11 +128,13 @@ const Overalltest = () => {
             className="h-[7rem] w-[14rem] rounded-lg flex flex-col justify-center items-center text-white font-semibold text-md gap-y-3 text-center drop-shadow-[3px_4px_2px_rgba(0,0,0,0.7)]"
             style={
               attempts[0]
-                ? { backgroundColor: "#89D85D" }
+                ? attempts[0] >= 50
+                  ? { backgroundColor: "#89D85D" }
+                  : { backgroundColor: "#D86C5D" }
                 : { backgroundColor: "#E3E2E7", color: "black" }
             }
           >
-            <div>Attemp 1</div>
+            <div>Attempt 1</div>
             {attempts[0] && <div>Accuracy {attempts[0]}</div>}
           </div>
 
@@ -74,11 +142,13 @@ const Overalltest = () => {
             className="h-[7rem] w-[14rem] rounded-lg flex flex-col justify-center items-center text-white font-semibold text-md gap-y-3 text-center drop-shadow-[3px_4px_2px_rgba(0,0,0,0.7)]"
             style={
               attempts[1]
-                ? { backgroundColor: "#D86C5D" }
+                ? attempts[1] >= 50
+                  ? { backgroundColor: "#89D85D" }
+                  : { backgroundColor: "#D86C5D" }
                 : { backgroundColor: "#E3E2E7", color: "black" }
             }
           >
-            <div>Attemp 2</div>
+            <div>Attempt 2</div>
             {attempts[1] && <div>Accuracy {attempts[1]}</div>}
           </div>
 
@@ -86,23 +156,33 @@ const Overalltest = () => {
             className="h-[7rem] w-[14rem] rounded-lg flex flex-col justify-center items-center text-white font-semibold text-md gap-y-3 text-center drop-shadow-[3px_4px_2px_rgba(0,0,0,0.7)]"
             style={
               attempts[2]
-                ? { backgroundColor: "#0984E3" }
+                ? attempts[2] >= 50
+                  ? { backgroundColor: "#89D85D" }
+                  : { backgroundColor: "#D86C5D" }
                 : { backgroundColor: "#E3E2E7", color: "black" }
             }
           >
-            <div>Attemp 3</div>
+            <div>Attempt 3</div>
             {attempts[2] && <div>Accuracy {attempts[2]}</div>}
           </div>
         </div>
       </div>
 
       <div className="flex justify-center gap-x-[4rem] mt-[7rem]">
-        <NavButton
-          text="Previous"
-          currLetter={letter}
-          onClickHandler={() => {}}
-        />
-        <NavButton text="Next" currLetter={letter} onClickHandler={() => {}} />
+        {letter != "A" && (
+          <NavButton
+            text="Previous"
+            currLetter={letter}
+            onClickHandler={previousLetter}
+          />
+        )}
+        {letter != "Z" && (
+          <NavButton
+            text="Next"
+            currLetter={letter}
+            onClickHandler={nextLetter}
+          />
+        )}
       </div>
     </div>
   );
