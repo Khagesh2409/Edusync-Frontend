@@ -11,12 +11,14 @@ const Overalltest = () => {
   let [attempts, setAttempts] = useState([]);
   let [word, setWord] = useState("Apple");
   let [pronounciation, setPronounciation] = useState("/appel/");
-  let averageAccuracy = 0;
+  let [averageAccuracy, setAverageAccuracy] = useState(0);
   let [image, setImage] = useState("");
   let [recording, setRecording] = useState(false);
 
   useEffect(() => {
     async function letterCall() {
+      setAttempts([]);
+      setAverageAccuracy(0);
       let url = baseUrl + "/test/" + letter;
       const res = await fetch(url);
       const data = await res.json();
@@ -27,6 +29,19 @@ const Overalltest = () => {
 
     letterCall();
   }, [letter]);
+
+  useEffect(() => {
+    let average = 0;
+    for (let i = 0; i < attempts.length; i++) {
+      average += attempts[i];
+    }
+
+    if (average == 0) {
+      setAverageAccuracy(0);
+    } else {
+      setAverageAccuracy((average / attempts.length).toFixed(2));
+    }
+  }, [attempts]);
 
   const nextLetter = () => {
     setLetter((prevLetter) => {
@@ -62,10 +77,6 @@ const Overalltest = () => {
     setRecording(false);
   };
 
-  for (let i = 0; i < attempts.length; i++) {
-    averageAccuracy += attempts[i];
-  }
-
   return (
     <div className="md:px-[9rem] pb-[4rem] font-spacegroteskmedium">
       <div className="text-md font-semibold mb-6">Letter : {letter}</div>
@@ -76,10 +87,7 @@ const Overalltest = () => {
         </span>
         <span className="me-[4rem]">
           Average Correct Percentage -{" "}
-          {attempts.length != 0
-            ? averageAccuracy / attempts.length
-            : averageAccuracy}{" "}
-          %
+          {attempts.length != 0 ? averageAccuracy : averageAccuracy} %
         </span>
       </div>
 
@@ -176,7 +184,7 @@ const Overalltest = () => {
             onClickHandler={previousLetter}
           />
         )}
-        {letter != "Z" && (
+        {attempts.length == 3 && letter != "Z" && (
           <NavButton
             text="Next"
             currLetter={letter}
