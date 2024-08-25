@@ -30,30 +30,17 @@ const Overalltest = () => {
 
   const nextLetter = () => {
     setLetter((prevLetter) => {
-      // Convert letter to its ASCII code
-      const charCode = prevLetter.charCodeAt(0);
-
-      // If the letter is 'Z', wrap around to 'A'
-      if (charCode === 90) {
-        return "A";
-      }
-
-      // Otherwise, move to the next letter
-      return String.fromCharCode(charCode + 1);
+      if (prevLetter === "A") return "B";
+      if (prevLetter === "B") return "Z";
+      return "A"; // If the letter is 'Z', wrap around to 'A'
     });
   };
 
   const previousLetter = () => {
     setLetter((prevLetter) => {
-      const charCode = prevLetter.charCodeAt(0);
-
-      // If the letter is 'A', wrap around to 'Z'
-      if (charCode === 65) {
-        return "Z";
-      }
-
-      // Otherwise, move to the previous letter
-      return String.fromCharCode(charCode - 1);
+      if (prevLetter === "A") return "Z";
+      if (prevLetter === "Z") return "B";
+      return "A"; // If the letter is 'B', wrap around to 'A'
     });
   };
 
@@ -148,7 +135,7 @@ const Overalltest = () => {
             }
           >
             <div>Attempt 1</div>
-            {attempts[0] != 0 && <div>Accuracy {attempts[0]}</div>}
+            {attempts[0] && <div>Accuracy {attempts[0]}</div>}
           </div>
 
           <div
@@ -162,7 +149,7 @@ const Overalltest = () => {
             }
           >
             <div>Attempt 2</div>
-            {attempts[1] != 0 && <div>Accuracy {attempts[1]}</div>}
+            {attempts[1] && <div>Accuracy {attempts[1]}</div>}
           </div>
 
           <div
@@ -176,7 +163,7 @@ const Overalltest = () => {
             }
           >
             <div>Attempt 3</div>
-            {attempts[2] != 0 && <div>Accuracy {attempts[2]}</div>}
+            {attempts[2] && <div>Accuracy {attempts[2]}</div>}
           </div>
         </div>
       </div>
