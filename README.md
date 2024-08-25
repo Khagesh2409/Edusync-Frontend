@@ -1,5 +1,5 @@
 # EduSync - PPT - https://edusync-empowering-neuro-wotiegg.gamma.site/
-[Watch the EduSync Project Description](https://www.youtube.com/watch?v=72UDGyiy9Kg)
+[![Watch EduSync Project Description](https://img.youtube.com/vi/72UDGyiy9Kg/0.jpg)](https://www.youtube.com/watch?v=72UDGyiy9Kg)
 
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
