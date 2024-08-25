@@ -4,25 +4,67 @@ import Mic from "../Components/Mic";
 import NavButton from "../Components/NavButton";
 import RecordingLoader from "../Components/RecordingLoader";
 
+const baseUrl = "http://localhost:5000";
+
 const Overalltest = () => {
   let [letter, setLetter] = useState("A");
   let [attempts, setAttempts] = useState([]);
-  let word = "apple";
-  let pronounciation = "/appel/";
+  let [word, setWord] = useState("Apple");
+  let [pronounciation, setPronounciation] = useState("/appel/");
   let averageAccuracy = 0;
   let [image, setImage] = useState("");
   let [recording, setRecording] = useState(false);
 
-  useEffect(function sampleRun() {
-    setImage(
-      "https://cdn.britannica.com/22/187222-050-07B17FB6/apples-on-a-tree-branch.jpg"
-    );
-    setAttempts([43, 67]);
-  }, []);
+  useEffect(() => {
+    async function letterCall() {
+      let url = baseUrl + "/test/" + letter;
+      const res = await fetch(url);
+      const data = await res.json();
+      setImage(data.image_link);
+      setWord(data.word1);
+      setPronounciation(data.pronunciation);
+    }
 
-  const recordButtonHandler = () => {
+    letterCall();
+  }, [letter]);
+
+  const nextLetter = () => {
+    setLetter((prevLetter) => {
+      // Convert letter to its ASCII code
+      const charCode = prevLetter.charCodeAt(0);
+
+      // If the letter is 'Z', wrap around to 'A'
+      if (charCode === 90) {
+        return "A";
+      }
+
+      // Otherwise, move to the next letter
+      return String.fromCharCode(charCode + 1);
+    });
+  };
+
+  const previousLetter = () => {
+    setLetter((prevLetter) => {
+      const charCode = prevLetter.charCodeAt(0);
+
+      // If the letter is 'A', wrap around to 'Z'
+      if (charCode === 65) {
+        return "Z";
+      }
+
+      // Otherwise, move to the previous letter
+      return String.fromCharCode(charCode - 1);
+    });
+  };
+
+  const recordButtonHandler = async () => {
     setRecording(true);
-    //api call
+    const url = baseUrl + "/record";
+    const data = await fetch(url);
+    setAttempts((prev) => {
+      let newAttempts = [...prev, data.percentage];
+      return newAttempts;
+    });
     setTimeout(() => {
       setRecording(false);
     }, 5000);
@@ -81,7 +123,13 @@ const Overalltest = () => {
           text="Stop Recording"
           onClickHandler={stopRecordHandler}
         />
-        <RecordButton bgColor="#0984E3" text="Reset all tries" />
+        <RecordButton
+          bgColor="#0984E3"
+          text="Reset all tries"
+          onClickHandler={() => {
+            setAttempts([]);
+          }}
+        />
       </div>
 
       <div className="my-[5rem]">
@@ -133,12 +181,20 @@ const Overalltest = () => {
       </div>
 
       <div className="flex justify-center gap-x-[4rem] mt-[7rem]">
-        <NavButton
-          text="Previous"
-          currLetter={letter}
-          onClickHandler={() => {}}
-        />
-        <NavButton text="Next" currLetter={letter} onClickHandler={() => {}} />
+        {letter != "A" && (
+          <NavButton
+            text="Previous"
+            currLetter={letter}
+            onClickHandler={previousLetter}
+          />
+        )}
+        {letter != "Z" && (
+          <NavButton
+            text="Next"
+            currLetter={letter}
+            onClickHandler={nextLetter}
+          />
+        )}
       </div>
     </div>
   );
