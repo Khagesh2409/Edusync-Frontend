@@ -18,7 +18,8 @@ const Overalltest = () => {
   let [recording, setRecording] = useState(false);
 
   const improvisationNeeded = () => {
-    navigate("/detect/" + (averageAccuracy / attempts.length));
+    let average = Math.round((averageAccuracy / attempts.length));
+    navigate("/detect/" + average);
   }
 
   useEffect(() => {
@@ -83,7 +84,7 @@ const Overalltest = () => {
         <span className="me-[4rem]">
           Average Correct Percentage -{" "}
           {attempts.length != 0
-            ? averageAccuracy / attempts.length
+            ? (averageAccuracy / attempts.length).toFixed(2)
             : averageAccuracy}{" "}
           %
         </span>
