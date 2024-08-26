@@ -135,7 +135,7 @@ const Overalltest = () => {
           <div
             className="h-[7rem] w-[14rem] rounded-lg flex flex-col justify-center items-center text-white font-semibold text-md gap-y-3 text-center drop-shadow-[3px_4px_2px_rgba(0,0,0,0.7)]"
             style={
-              attempts[0]
+              typeof attempts[0] != "undefined"
                 ? attempts[0] >= 50
                   ? { backgroundColor: "#89D85D" }
                   : { backgroundColor: "#D86C5D" }
@@ -149,7 +149,7 @@ const Overalltest = () => {
           <div
             className="h-[7rem] w-[14rem] rounded-lg flex flex-col justify-center items-center text-white font-semibold text-md gap-y-3 text-center drop-shadow-[3px_4px_2px_rgba(0,0,0,0.7)]"
             style={
-              attempts[1]
+              typeof attempts[1] != "undefined"
                 ? attempts[1] >= 50
                   ? { backgroundColor: "#89D85D" }
                   : { backgroundColor: "#D86C5D" }
@@ -163,7 +163,7 @@ const Overalltest = () => {
           <div
             className="h-[7rem] w-[14rem] rounded-lg flex flex-col justify-center items-center text-white font-semibold text-md gap-y-3 text-center drop-shadow-[3px_4px_2px_rgba(0,0,0,0.7)]"
             style={
-              attempts[2]
+              typeof attempts[2] != "undefined"
                 ? attempts[2] >= 50
                   ? { backgroundColor: "#89D85D" }
                   : { backgroundColor: "#D86C5D" }
