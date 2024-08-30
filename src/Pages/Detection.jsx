@@ -4,7 +4,7 @@ import Component from '../assets/Component 35.png';
 import Trophy from '../assets/Trophy.png';
 import char from '../assets/character_de1111a819 1.png';
 import {useNavigate} from 'react-router-dom';
-import videoMouth from '../assets/test.mp4';
+// import videoMouth from '../assets/test.mp4';
 
 export default function Articles() {
   const [percentage, setPercentage] = useState(null);
@@ -98,7 +98,7 @@ export default function Articles() {
             <div className='md:flex justify-between items-center m-20 md:mx-80'>
               <div className='rounded'>
                 <video width="320" height="320" autoPlay loop className='rounded-xl'>
-                  <source src={videoMouth} type='video/mp4' />
+                  {/* <source src={videoMouth} type='video/mp4' /> */}
                 </video>
               </div>
               <div>
