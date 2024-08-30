@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
-import Component from '../assets/Component 35.png';
-import Trophy from '../assets/Trophy.png';
-import char from '../assets/character_de1111a819 1.png';
-import {useNavigate} from 'react-router-dom';
-// import videoMouth from '../assets/test.mp4';
+import Component from "../assets/Component 35.png";
+import Trophy from "../assets/Trophy.png";
+import char from "../assets/character_de1111a819 1.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Articles() {
   const [percentage, setPercentage] = useState(null);
@@ -34,12 +33,12 @@ export default function Articles() {
   }, [percentage]);
 
   const backtolearning = () => {
-    navigate('/learning');
-  }
+    navigate("/learning");
+  };
 
   const backtotryagain = () => {
-    navigate('/course');
-  }
+    navigate("/course");
+  };
 
   return (
     <div>
@@ -95,10 +94,24 @@ export default function Articles() {
             <div className="font-spacegrotesksemibold border-y-4 border-black font-medium lg:text-2xl md:text-2xl sm:text-xl text-xl w-fit lg:ml-20 ml-2 text-center mt-48">
               Model and Remedies
             </div>
-            <div className='md:flex justify-between items-center m-20 md:mx-80'>
-              <div className='rounded'>
-                <video width="320" height="320" autoPlay loop className='rounded-xl'>
-                  {/* <source src={videoMouth} type='video/mp4' /> */}
+            <div className="md:flex justify-between items-center m-20 md:mx-80">
+              <div className="rounded">
+                <video
+                  width="320"
+                  height="320"
+                  autoPlay={true}
+                  muted={true}
+                  loop={true}
+                  controls={false}
+                  controlslist="nodownload"
+                  webkitallowfullscreen
+                  mozallowfullscreen
+                  allowfullscreen
+                >
+                  <source
+                    src="https://edusync-video.s3.us-east-2.amazonaws.com/InShot_20240126_153904344.mp4"
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div>
@@ -122,11 +135,15 @@ export default function Articles() {
       </div>
       <div className="font-spacegrotesksemibold md:flex gap-20 ml-40 mx-20 lg:mx-80 my-10 mb-20">
         <button className="w-[20rem] h-[4rem] bg-[#0984E3] mt-10 rounded-lg text-white drop-shadow-[1px_2px_1px_rgba(0,0,0,0.7)] hover:opacity-80 flex justify-center ml-20 items-center">
-          <div onClick={backtotryagain} className="mx-1 text-xl">Test Again</div>
+          <div onClick={backtotryagain} className="mx-1 text-xl">
+            Test Again
+          </div>
           {/* <img src={Sparkle} className="h-[1rem]"></img> */}
         </button>
         <button className="font-spacegrotesksemibold w-[20rem] h-[4rem] bg-[#89D85D] mt-10 rounded-lg drop-shadow-[1px_2px_1px_rgba(0,0,0,0.7)] hover:opacity-80 flex justify-center items-center">
-          <div onClick={backtolearning} className="mx-1 text-xl">Back To Learning</div>
+          <div onClick={backtolearning} className="mx-1 text-xl">
+            Back To Learning
+          </div>
           {/* <img src={Sparkle} className="h-[1rem]"></img> */}
         </button>
         {/* <button></button> */}
